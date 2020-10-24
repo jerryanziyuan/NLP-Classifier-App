@@ -130,10 +130,9 @@ def build_model():
     ])
     # define parameters for GridSearchCV
     parameters = {
-#     'clf__estimator__n_estimators': [5,10,15],
-#     'clf__estimator__max_features': ['auto', 'sqrt']
-    'clf__estimator__n_estimators': [10,15],
-
+    'clf__estimator__n_estimators': [5,10,15],
+    'clf__estimator__max_features': ['auto', 'sqrt']
+#     'clf__estimator__n_estimators': [10,15],
         
 }
     # create gridsearch object and return as final model pipeline
