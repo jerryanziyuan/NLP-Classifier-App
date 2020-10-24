@@ -71,8 +71,13 @@ def index():
     
     # extract data needed for visuals
     # TODO: Below is an example - modify to extract data for your own visuals
-    genre_counts = df.groupby('genre').count()['message']
+    genre_counts = df.groupby('genre').count()['message'].sort_values(ascending=False)
     genre_names = list(genre_counts.index)
+    
+    # Plotting of Categories Distribution in Direct Genre
+    news_cat = df[df.genre == 'news']
+    news_cat_counts = (news_cat.mean()*news_cat.shape[0]).sort_values(ascending=False)
+    news_cat_names = list(news_cat_counts.index)
     
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
@@ -94,8 +99,29 @@ def index():
                     'title': "Genre"
                 }
             }
+        },
+        
+        {
+            'data': [
+                Bar(
+                    x=news_cat_names,
+                    y=news_cat_counts
+                )
+            ],
+
+            'layout': {
+                'title': 'News Categories Distribution',
+                'yaxis': {
+                    'title': "Count of Cat"
+                },
+                'xaxis': {
+                    'title': "News Categories"
+                }
+            }
         }
     ]
+            
+    
     
     # encode plotly graphs in JSON
     ids = ["graph-{}".format(i) for i, _ in enumerate(graphs)]
